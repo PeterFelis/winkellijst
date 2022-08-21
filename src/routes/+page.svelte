@@ -1,31 +1,25 @@
 <script>
     import Produktenlijst from "$lib/comps/Produktenlijst.svelte";
     import produkten from "$lib/prods.js";
-    let winkelwagen = [];
+    import Bestellijst from "$lib/comps/Bestellijst.svelte";
+    import winkelwagen from "../store.js";
 
-    const bijwerkenWinkelwagen = (nummer) => {
-        console.log(nummer);
-        winkelwagen = [produkten[parseInt(nummer)], ...winkelwagen];
-    };
+    
+    $:totaalInWinkelwagen = $winkelwagen.length;
+    let winkelWagenZichtbaar = true;   
 </script>
 
 <div class="container">
     <div class="produktenlijst">
         <h2>produktenlijst</h2>
-        <Produktenlijst
-            on:message={(e) => bijwerkenWinkelwagen(e.detail.text)}
-        />
+        <Produktenlijst/>
     </div>
 
     <div class="winkelwagen">
-        <button>tonen</button>
-        {#if winkelwagen.length > 0}
-            {#each winkelwagen as produkt}
-                {produkt.naam}
-                {produkt.kleur}
-            {/each}
-        {:else}
-            Niets in bestelling
+        <p>{totaalInWinkelwagen} verschillende soorten in winkelwagen</p>
+        <button on:click={()=> winkelWagenZichtbaar=!winkelWagenZichtbaar}>tonen</button>
+        {#if winkelWagenZichtbaar}
+         <Bestellijst />
         {/if}
     </div>
 </div>
@@ -41,9 +35,9 @@
     }
 
     .produktenlijst {
-        width: 70%;
+        width: 60%;
     }
     .winkelwagen {
-        width: 30%;
+        width: 40%;
     }
 </style>

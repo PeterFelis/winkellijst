@@ -1,0 +1,36 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+}
+
+.w33{
+    width: 33%;
+}
+.w50{
+    width:50%;
+}
+.w100{
+    width: 100%;
+}
+
+.rood{
+    background: red;
+}
+.groen{
+    background: green;
+    color:white;
+}
+.oranje{
+    background: orange;
+}
